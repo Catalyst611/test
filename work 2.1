@@ -1,0 +1,49 @@
+#include <cstring>
+#include<iostream>
+using namespace std;
+class School {
+    private:
+    char* _name;
+    char* _addr;
+    public:
+    School (char* name, char* addr) {
+        _name = new char[strlen(name) + 1];
+        strcpy(_name, name);
+        _addr = new char[strlen(addr) + 1];
+        strcpy(_addr, addr);
+        cout << "school constructed." << endl;
+    }
+    School (const School& s) {
+        _name = new char[strlen(s._name)+1];
+        strcpy(_name, s._name);
+        _addr = new char[strlen(s._addr)+1];
+        strcpy(_addr, s._addr);
+        cout <<"school copy constructed."<<endl;
+    }
+    ~School() {
+        delete[] _name;
+        delete[] _addr;
+        cout <<"school deconstructed.delete space of name and address."<<endl;
+    }
+    void Show(const char* objName)const {
+        cout <<objName<<endl;
+        cout <<"name:"<<_name<<endl;
+        cout <<"addr:"<<_addr<<endl;
+    }
+};
+int main() {
+    cout << "Input school name:"<<endl;
+    char name[80];
+    cin.getline(name,80);
+    cout << "Input school addr:"<<endl;
+    char addr[80];
+    cin.getline(addr,80);
+    School myschool(name,addr);
+    myschool.Show("myschool:");
+    School yourschool(myschool);
+    yourschool.Show("yourschool:");
+    return 0;
+
+}
+// Created by MsOH_ on 25-3-20.
+//
